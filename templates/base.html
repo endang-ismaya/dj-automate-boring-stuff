@@ -1,0 +1,41 @@
+{% load django_bootstrap5 %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    {# Load CSS and JavaScript #}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}"
+          rel="stylesheet"
+          type="text/css">
+    <link href="{% static 'fontawesomefree/css/brands.css' %}"
+          rel="stylesheet"
+          type="text/css">
+    <link href="{% static 'fontawesomefree/css/solid.css' %}"
+          rel="stylesheet"
+          type="text/css">
+    <title>Automate the boring stuff with Django</title>
+  </head>
+  <body>
+    {% include "includes/nav.html" %}
+    <!-- End of Navbar -->
+    <main class="container mb-5">
+      <div class="pb-2 mb-2 border-bottom">
+        {% block page_header %}
+        {% endblock page_header %}
+      </div>
+      {% block content %}
+      {% endblock content %}
+    </main>
+    <footer class="footer mt-auto py-3 bg-light mx-auto ">
+      <div class="container">
+        <span class="text-muted">© 2024 EndangIsmaya - All Rights Reserved</span>
+      </div>
+    </footer>
+  </body>
+</html>

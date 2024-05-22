@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load django_bootstrap5 %}
+{% block page_header %}
+  <h3 class="text-center">Import Data To Database Tables</h3>
+{% endblock page_header %}
+{% block content %}
+  <form action="{% url 'dataentries:import_data' %}"
+        method="post"
+        enctype="multipart/form-data"
+        style="max-width: 600px;
+               margin:auto;
+               padding-top: 50px">
+    {% csrf_token %}
+    <div class="form-group mb-3">
+      <label for="file_path">Upload CSV File</label>
+      <input type="file" name="file_path" class="form-control" required>
+    </div>
+    <div class="form-group mb-3">
+      <label for="model_name">Select Database Table</label>
+      <select name="model_name" class="form-control" required>
+        <option value="" disabled selected>Select</option>
+        {% for model in custom_models %}<option value="{{ model }}">{{ model }}</option>{% endfor %}
+      </select>
+    </div>
+    <div class="form-group">
+      <input type="submit" value="Import Data" class="btn btn-primary">
+    </div>
+  </form>
+{% endblock content %}
