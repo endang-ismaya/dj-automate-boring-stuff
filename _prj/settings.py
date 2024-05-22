@@ -14,6 +14,7 @@ import os
 from pathlib import Path
 
 import dotenv
+from django.contrib.messages import constants as messages
 
 # environment
 dotenv.read_dotenv()
@@ -143,3 +144,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 LOGIN_URL = "accounts:login"
 LOGIN_REDIRECT_URL = "index"
 LOGOUT_REDIRECT_URL = "accounts:login"
+
+
+
+MESSAGE_TAGS = {
+    messages.ERROR: "danger",
+    50: "critical",
+}
