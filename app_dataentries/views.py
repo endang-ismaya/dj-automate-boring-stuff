@@ -3,7 +3,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.shortcuts import redirect, render
 
-from app_dataentries.tasks import import_data_task
+# from app_dataentries.tasks import import_data_task
 from app_dataentries.utils import check_csv_errors, get_all_custom_models
 from app_uploads.models import Upload
 
@@ -35,7 +35,7 @@ def import_data(request):
             return redirect("dataentries:import_data")
 
         # handle the import data task here
-        import_data_task.delay(file_path, model_name)
+        # import_data_task.delay(file_path, model_name)
 
         # show the message to the user
         messages.success(
