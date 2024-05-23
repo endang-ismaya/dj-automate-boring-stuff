@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.shortcuts import redirect, render
 
 # from app_dataentries.tasks import import_data_task
-from app_dataentries.tasks import import_data_task
+from app_dataentries.tasks import export_data_task, import_data_task
 from app_dataentries.utils import check_csv_errors, get_all_custom_models
 from app_uploads.models import Upload
 
@@ -50,3 +50,24 @@ def import_data(request):
             "custom_models": custom_models,
         }
     return render(request, "app_dataentries/import_data.html", context)
+
+
+def export_data(request):
+    if request.method == "POST":
+        model_name = request.POST.get("model_name")
+
+        # call the export data task
+        export_data_task.delay(model_name)
+
+        # show the message to the user
+        messages.success(
+            request,
+            "Your data is being exported, you will be notified once it is done.",
+        )
+        return redirect("dataentries:export_data")
+    else:
+        custom_models = get_all_custom_models()
+        context = {
+            "custom_models": custom_models,
+        }
+    return render(request, "app_dataentries/export_data.html", context)
