@@ -3,16 +3,20 @@ import time
 from django.core.management import call_command
 
 from _prj.celery import app
-# from .utils import generate_csv_file, send_email_notification
 
 
 @app.task
 def celery_test_task():
     time.sleep(10)  # simulation of any task that's going to take 10 seconds
-    # # send an email
-    # mail_subject = "Test subject"
+    # send an email
+    # mail_subject = "10 Seconds Test Email"
     # message = "This is a test email"
-    # to_email = settings.DEFAULT_TO_EMAIL
+    # from_email = settings.DEFAULT_FROM_EMAIL
+    # to_email = "endang.ismaya@gmail.com"
+
+    # mail = EmailMessage(mail_subject, message, from_email, to=[to_email])
+    # mail.send()
+
     # send_email_notification(mail_subject, message, to_email)
     # return "Email sent successfully."
     return "Task executed successfully"
