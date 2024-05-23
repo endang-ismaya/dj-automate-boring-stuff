@@ -9,6 +9,10 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("dataentries/", include("app_dataentries.urls")),
     path("celery-test", views.celery_test, name="celery_test"),
-    path("", views.index, name="index")
+    path("", views.index, name="index"),
+    # Registration & Login urls
+    path('register/', views.register, name='register'),
+    path('login/', views.login, name='login'),
+    path('logout/', views.logout, name='logout'),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

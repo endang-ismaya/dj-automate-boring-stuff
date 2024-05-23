@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load django_bootstrap5 %}
+{% block content %}
+  <div class="container mt-5 p-3 shadow rounded" style="max-width: 600px;">
+    <h2 class="text-center">
+      <i class="fa-solid fa-user-plus"></i> Register
+    </h2>
+    <form action="{% url "register" %}" method="post">
+      {% csrf_token %}
+      {% bootstrap_form form %}
+      {% bootstrap_button button_type="submit" content="Register" %}
+    </form>
+  </div>
+{% endblock content %}

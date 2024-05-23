@@ -1,8 +1,5 @@
 {% extends "base.html" %}
 {% load django_bootstrap5 %}
-{% block page_header %}
-  <h2 class="text-center">Automate The Boring Stuff With Django</h2>
-{% endblock page_header %}
 {% block content %}
   <div class="container" style="padding: 50px;margin-top: 5%;">
     {% if user.is_authenticated %}
@@ -98,8 +95,8 @@
           By leveraging Django's capabilities, users can streamline their workflows, saving time and enhancing productivity.
         </p>
         <div style="display: flex; justify-content: center;">
-          <a href="{% url 'index' %}" class="btn btn-primary">LOGIN</a>
-          &nbsp;<a href="{% url 'index' %}" class="btn btn-success">REGISTER</a>
+          <a href="{% url 'login' %}" class="btn btn-primary">LOGIN</a>
+          &nbsp;<a href="{% url 'register' %}" class="btn btn-success">REGISTER</a>
         </div>
       </div>
     {% endif %}
