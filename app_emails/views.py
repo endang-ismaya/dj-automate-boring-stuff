@@ -1,9 +1,17 @@
 from django.contrib import messages
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 
 from _prj.helper import get_subslist, is_post
 from app_emails.forms import EmailForm
+from app_emails.models import Email
 from app_emails.tasks import send_email_task
+
+
+def view_email(request, email_id):
+    email = get_object_or_404(Email, pk=email_id)
+
+    context = {"email": email}
+    return render(request, "app_emails/email-view.html", context)
 
 
 def send_email(request):

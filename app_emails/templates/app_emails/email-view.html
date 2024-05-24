@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load django_bootstrap5 %}
+{% block content %}
+  {% if email %}
+    <div class="card mb-3 mx-auto">
+      <div class="row g-0">
+        <div class="col-md-8 ">
+          <div class="card-body">
+            <h5 class="card-title">{{ email.subject }}</h5>
+            <p class="card-text">{{ email.body | safe }}</p>
+            <p class="card-text">
+              <small class="text-body-secondary"><i>Send at: {{ email.created_at|date:"M d, Y " }} | {{ email.created_at| timesince }} ago.</i></small>
+            </p>
+            <p>
+              <small class="text-body-secondary"><i>Category: {{ email.email_list }}.</i></small>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% else %}
+    <p>No email found.</p>
+  {% endif %}
+{% endblock content %}

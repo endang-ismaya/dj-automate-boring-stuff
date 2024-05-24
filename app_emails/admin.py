@@ -11,6 +11,15 @@ class SubscriptionCategoryAdmin(admin.ModelAdmin):
     )
 
 
+class EmailAdmin(admin.ModelAdmin):
+    list_display = (
+        "id",
+        "subject",
+        "created_at",
+        "updated_at",
+    )
+
+
 admin.site.register(SubscriptionCategory, SubscriptionCategoryAdmin)
 admin.site.register(Subscriber)
-admin.site.register(Email)
+admin.site.register(Email, EmailAdmin)
