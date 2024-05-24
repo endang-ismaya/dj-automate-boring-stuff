@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load django_bootstrap5 %}
+{% block content %}
+  <div class="container mt-5 p-3 shadow rounded" style="max-width: 600px;">
+    <h2 class="text-center">Compose an Email</h2>
+    <form action="{% url 'emails:send_email' %}"
+          method="post"
+          enctype="multipart/form-data">
+      {% csrf_token %}
+      {% csrf_token %}
+      {% bootstrap_form form %}
+      {% bootstrap_button button_type="submit" content="Send" %}
+    </form>
+  </div>
+{% endblock content %}
