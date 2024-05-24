@@ -12,7 +12,7 @@ def send_email(request):
         email_form = EmailForm(request.POST, request.FILES)
 
         if email_form.is_valid():
-            # email_form.save()
+            mail_form = email_form.save()
 
             # send an email
             mail_subject = email_form.cleaned_data["subject"]
@@ -20,7 +20,7 @@ def send_email(request):
             email_list = email_form.cleaned_data["email_list"]
 
             # Extract email addresses from Subscriber Model
-            to_email, s_mails = get_subslist(email_list)
+            to_email = get_subslist(email_list)
 
             if len(to_email) < 1:
                 messages.error(
@@ -29,10 +29,16 @@ def send_email(request):
                 )
                 return redirect("emails:send_email")
 
+            # check attachment
+            attachment = None
+            if mail_form.attachment:
+                attachment = mail_form.attachment.path
+
             send_email_notification(
                 mail_subject=mail_subject,
                 message=message,
-                to_email=s_mails,
+                to_email=to_email,
+                attachment=attachment,
             )
 
             # send success message

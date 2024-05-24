@@ -15,4 +15,4 @@ def get_subslist(category):
     for subs in subscribers:
         to_email.append(subs.email)
     
-    return to_email, ",".join(to_email)
+    return to_email
