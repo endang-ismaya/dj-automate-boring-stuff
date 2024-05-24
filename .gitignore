@@ -165,3 +165,5 @@ cython_debug/
 mynotes/
 resources/
 sh/
+media/
+static/

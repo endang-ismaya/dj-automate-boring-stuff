@@ -73,6 +73,7 @@ def send_email_notification(
         if attachment is not None:
             mail.attach_file(attachment)
 
+        mail.content_subtype = "html"
         mail.send()
 
     except Exception as e:

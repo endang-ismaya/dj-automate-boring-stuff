@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     # 3rd party apps
     "django_bootstrap5",
     "fontawesomefree",
+    "ckeditor",
+    "anymail",
 ]
 
 MIDDLEWARE = [
@@ -155,15 +157,30 @@ MESSAGE_TAGS = {
 
 
 # CELERY CONFIG
-CELERY_BROKER_URL = "redis://localhost:6379"
+CELERY_BROKER_URL = "redis://127.0.0.1:6379"
 
 # SMTP Configuration
-EMAIL_BACKEND = os.environ.get("EMAIL_BACKEND")
-EMAIL_HOST = os.environ.get("EMAIL_HOST")
-EMAIL_PORT = os.environ.get("EMAIL_PORT")
-EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS")
+# EMAIL_BACKEND = os.environ.get("EMAIL_BACKEND")
+# EMAIL_HOST = os.environ.get("EMAIL_HOST")
+# EMAIL_PORT = os.environ.get("EMAIL_PORT")
+# EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS")
 
-EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
+# EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+# EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 
+
+ANYMAIL = {
+    # (exact settings here depend on your ESP...)
+    "POSTMARK_SERVER_TOKEN": os.environ.get("POSTMARK_API_KEY"),
+}
+EMAIL_BACKEND = "anymail.backends.postmark.EmailBackend"  # or sendgrid.EmailBackend, or...
 DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL")
+
+# CKEDITOR
+CKEDITOR_CONFIGS = {
+    'default': {
+        'height': 300,
+    },
+    'extraPlugins': ','.join(
+    ['codesnippet',]),
+}

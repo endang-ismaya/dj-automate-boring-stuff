@@ -1,3 +1,4 @@
+from ckeditor.fields import RichTextField
 from django.db import models
 
 
@@ -30,7 +31,7 @@ class Subscriber(models.Model):
 
 class Email(models.Model):
     subject = models.CharField(max_length=150)
-    body = models.TextField(max_length=500)
+    body = RichTextField()
     attachment = models.FileField(upload_to="email_attachments/", null=True, blank=True)
     sent_at = models.DateTimeField(auto_now_add=True)
     email_list = models.ForeignKey(
