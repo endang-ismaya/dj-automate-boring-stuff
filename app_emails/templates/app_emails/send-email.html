@@ -7,8 +7,7 @@
           method="post"
           enctype="multipart/form-data">
       {% csrf_token %}
-      {% csrf_token %}
-      {% bootstrap_form form %}
+      {% bootstrap_form email_form %}
       {% bootstrap_button button_type="submit" content="Send" %}
     </form>
   </div>
