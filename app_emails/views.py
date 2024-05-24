@@ -2,8 +2,8 @@ from django.contrib import messages
 from django.shortcuts import redirect, render
 
 from _prj.helper import get_subslist, is_post
-from app_dataentries.utils import send_email_notification
 from app_emails.forms import EmailForm
+from app_emails.tasks import send_email_task
 
 
 def send_email(request):
@@ -34,7 +34,8 @@ def send_email(request):
             if mail_form.attachment:
                 attachment = mail_form.attachment.path
 
-            send_email_notification(
+            # sending email with celery
+            send_email_task.delay(
                 mail_subject=mail_subject,
                 message=message,
                 to_email=to_email,
@@ -42,7 +43,9 @@ def send_email(request):
             )
 
             # send success message
-            messages.success(request, "Email send successfully")
+            messages.success(
+                request, "The email has been sent. Please check your inbox shortly."
+            )
             return redirect("emails:send_email")
 
     else:
