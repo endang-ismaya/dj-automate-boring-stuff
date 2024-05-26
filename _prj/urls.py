@@ -16,5 +16,7 @@ urlpatterns = [
     path("logout/", views.logout, name="logout"),
     # app emails
     path("emails/", include("app_emails.urls")),
+    # app sandbox
+    path("sandbox/", include("app_sandbox.urls")),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

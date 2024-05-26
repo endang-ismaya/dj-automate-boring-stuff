@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+import datetime
 import os
 from pathlib import Path
 
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # internal apps
+    "app_sandbox",
     "app_emails",
     "app_uploads",
     "app_dataentries",
@@ -149,7 +151,6 @@ LOGIN_REDIRECT_URL = "index"
 LOGOUT_REDIRECT_URL = "login"
 
 
-
 MESSAGE_TAGS = {
     messages.ERROR: "danger",
     50: "critical",
@@ -173,14 +174,72 @@ ANYMAIL = {
     # (exact settings here depend on your ESP...)
     "POSTMARK_SERVER_TOKEN": os.environ.get("POSTMARK_API_KEY"),
 }
-EMAIL_BACKEND = "anymail.backends.postmark.EmailBackend"  # or sendgrid.EmailBackend, or...
+EMAIL_BACKEND = (
+    "anymail.backends.postmark.EmailBackend"  # or sendgrid.EmailBackend, or...
+)
 DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL")
 
 # CKEDITOR
 CKEDITOR_CONFIGS = {
-    'default': {
-        'height': 300,
+    "default": {
+        "height": 300,
     },
-    'extraPlugins': ','.join(
-    ['codesnippet',]),
+    "extraPlugins": ",".join(
+        [
+            "codesnippet",
+        ]
+    ),
+}
+
+# LOGGING
+LOGGING_DIR = os.path.join(BASE_DIR, "logs")
+if not os.path.exists(LOGGING_DIR):
+    os.makedirs(LOGGING_DIR)
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "{levelname} {asctime} {filename} {funcName}: {message}",
+            "style": "{",
+        },
+        "simple": {
+            "format": "{levelname} {message}",
+            "style": "{",
+        },
+        "verbose_console": {
+            "format": "{asctime} {filename} {funcName} {levelname} {levelno} {lineno}: {message}",
+            "style": "{",
+        },
+    },
+    "handlers": {
+        "file": {
+            "level": "DEBUG",
+            "class": "logging.handlers.TimedRotatingFileHandler",
+            "filename": os.path.join(
+                LOGGING_DIR, f"{datetime.datetime.now().strftime('%Y%m%d')}_django.log"
+            ),
+            "when": "midnight",  # Rotate at midnight
+            "backupCount": 30,  # Keep 30 days of log files
+            "formatter": "verbose",
+        },
+        "console": {
+            "class": "logging.StreamHandler",
+            "formatter": "verbose_console",
+        },
+    },
+    # Create a logger for your specific application
+    "root": {
+        "handlers": ["console"],
+        "level": "DEBUG",
+    },
+    "loggers": {
+        # Log all messages from Django's built-in components
+        "djlog": {
+            "handlers": ["file"],
+            "level": "DEBUG",
+            "propagate": True,
+        },
+    },
 }
