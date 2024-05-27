@@ -228,6 +228,17 @@ LOGGING = {
             "class": "logging.StreamHandler",
             "formatter": "verbose_console",
         },
+        "app_tracker": {
+            "level": "DEBUG",
+            "class": "logging.handlers.TimedRotatingFileHandler",
+            "filename": os.path.join(
+                LOGGING_DIR,
+                f"{datetime.datetime.now().strftime('%Y%m%d')}_app_tracker.log",
+            ),
+            "when": "midnight",  # Rotate at midnight
+            "backupCount": 30,  # Keep 30 days of log files
+            "formatter": "verbose",
+        },
     },
     # Create a logger for your specific application
     "root": {
@@ -238,6 +249,11 @@ LOGGING = {
         # Log all messages from Django's built-in components
         "djlog": {
             "handlers": ["file"],
+            "level": "DEBUG",
+            "propagate": True,
+        },
+        "tracklog": {
+            "handlers": ["app_tracker"],
             "level": "DEBUG",
             "propagate": True,
         },
