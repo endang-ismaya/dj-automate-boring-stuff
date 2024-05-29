@@ -20,5 +20,11 @@ urlpatterns = [
     path("sandbox/", include("app_sandbox.urls")),
     # app profiles
     path("profiles/", include("app_profiles.urls")),
+    # app reports
+    path("reports/", include("app_reports.urls")),
+    # app products
+    path("products/", include("app_products.urls")),
+    # app areas
+    path("areas/", include("app_areas.urls")),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

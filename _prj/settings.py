@@ -46,6 +46,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # internal apps
+    "app_areas",
+    "app_products",
+    "app_reports",
     "app_profiles",
     "app_sandbox",
     "app_emails",
