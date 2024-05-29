@@ -59,6 +59,8 @@ INSTALLED_APPS = [
     "fontawesomefree",
     "ckeditor",
     "anymail",
+    "crispy_forms",
+    "crispy_bootstrap4",
 ]
 
 MIDDLEWARE = [
@@ -263,3 +265,7 @@ LOGGING = {
         },
     },
 }
+
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+CRISPY_TEMPLATE_PACK = "bootstrap4"

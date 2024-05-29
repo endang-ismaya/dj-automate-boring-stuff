@@ -9,12 +9,7 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <!--custom css-->
-    <link rel="stylesheet"
-          type="text/css"
-          href="{% static 'css/style.css' %}"
-          --bootstrap
-          css
-          js-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
@@ -29,14 +24,14 @@
     </title>
   </head>
   <body>
-    {% include "navbar.html" %}
+    {% comment %} {% include "navbar.html" %} {% endcomment %}
     <section class="bg-dark" style="min-height:85vh">
       <div class="pt-big">
         {% block content %}
         {% endblock content %}
       </div>
     </section>
-    {% include "footer.html" %}
+    {% comment %} {% include "footer.html" %} {% endcomment %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   </body>

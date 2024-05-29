@@ -1,8 +1,17 @@
 from django.shortcuts import render
 
-# Create your views here.
+from app_reports.forms import ProblemReportedForm, ReportForm
 
-def index(request):
-    """app_reports index view"""
-    context = {}
-    return render(request, "app_reports/index.html", context)
+
+def report_view(request):
+    """Report View"""
+
+    form = ReportForm()
+    pform = ProblemReportedForm()
+
+    context = {
+        "form": form,
+        "pform": pform,
+    }
+
+    return render(request, "app_reports/report.html", context)

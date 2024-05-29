@@ -2,6 +2,7 @@ import random
 
 from django.contrib.auth.models import User
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 
 from app_areas.models import ProductionLine
@@ -82,8 +83,23 @@ class Report(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def get_day(self):
+        return self.day.strftime("%Y/%m/%d")
+
+    def get_absolute_url(self):
+        return reverse(
+            "reports:update-view",
+            kwargs={
+                "production_line": self.production_line,
+                "pk": self.pk,
+            },
+        )
+
     def __str__(self):
         return "{}-{}-{}".format(self.start_hour, self.end_hour, self.production_line)
+
+    class Meta:
+        ordering = ("-created",)
 
 
 class ProblemReported(models.Model):

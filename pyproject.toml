@@ -74,6 +74,6 @@ docstring-code-line-length = "dynamic"
 [tool.djlint]
 indent_size=2
 indent=2
-ignore="H014,H015,H021,H006"
+ignore="H014,H015,H021,H006,H023"
 line_break_after_multiline_tag=false
 max_line_length=120
