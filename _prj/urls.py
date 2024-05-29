@@ -18,5 +18,7 @@ urlpatterns = [
     path("emails/", include("app_emails.urls")),
     # app sandbox
     path("sandbox/", include("app_sandbox.urls")),
+    # app profiles
+    path("profiles/", include("app_profiles.urls")),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
